@@ -41,16 +41,13 @@ describe 'Game' do
   end
 
   describe 'initialize' do
-    it 'accepts 2 players and a board' do
-      board = Board.new
-      player_1 = Player.new("X")
-      player_2 = Player.new("O")
+    it 'also initializes 2 players and a board' do
 
-      game = Game.new(player_1, player_2, board)
+      game = Game.new
 
-      expect(game.player_1).to eq(player_1)
-      expect(game.player_2).to eq(player_2)
-      expect(game.board).to eq(board)
+      expect(game.player_1).to be_a(Player)
+      expect(game.player_2).to be_a(Player)
+      expect(game.board).to be_a(Board)
     end
 
     it 'defaults to two human players, X and O, with an empty board' do
