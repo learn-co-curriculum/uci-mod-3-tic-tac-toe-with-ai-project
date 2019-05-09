@@ -1,4 +1,4 @@
-# Tic-tac-toe with AI
+# Tic-Tac-Toe with AI
 
 ## Learning Goals
 
@@ -7,7 +7,7 @@
 
 ## Overview
 
-The goal of this project is to build a version of Tic-tac-toe with 0-, 1-, and
+The goal of this project is to build a version of Tic-Tac-Toe with 0-, 1-, and
 2-player modes:
 
 - A 0-player game has two computer players playing against each other with no
@@ -15,7 +15,7 @@ The goal of this project is to build a version of Tic-tac-toe with 0-, 1-, and
 - A 1-player game has a human playing against a computer.
 - A 2-player game has two human players.
 
-You'll be implementing Tic-tac-toe using multiple objects that relate and
+You'll be implementing Tic-Tac-Toe using multiple objects that relate and
 collaborate, including separate classes for human players and computer players.
 The computer player class will have some sort of artificial intelligence or
 logic to make move decisions. Finally, you'll wrap all of this up in a CLI.
@@ -24,34 +24,6 @@ logic to make move decisions. Finally, you'll wrap all of this up in a CLI.
 > worked in previous labs, the expectations in _this_ lab are higher! This is
 > true to real-life development as well: as our programs get more sophisticated,
 > the code we used to rely on is no longer appropriate.
-
-## Working together
-
-Working on a software project with another person is not something to be taken
-lightly. While you are a fantastic solo coder, software development is often a
-collaborative activity. Just like anything else, there is skill in collaborating
-on code. In the end, collaborating with another person boils down to three
-different styles:
-
-- Pair - Pair the entire time working linearly together
-- Pass - Each person completes 1 requirement and then passes the project to the other person
-- Parallel - work on different parts at the same time by agreeing on interfaces and stubs and meeting in the middle
-  - Person A codes the board and the human player class
-  - Person B creates the game engine, expecting a working board and player with stubs
-  - Person A creates the computer player
-  - Work together on the AI (It's hard)
-
-Remember! The goal at The Flatiron School is not to do, it is to *learn*. Make
-sure you have worked in all three styles of collaboration. We want you to learn
-how the different styles work. The most important part is that together you and
-your partner understand every piece of the code.
-
-## Requirements
-
-- Passing Unit Tests
-- 0, 1, or 2-player Tic-tac-toe.
-- Command Line Interface
-- Computer AI
 
 ## Project Structure
 
@@ -87,25 +59,25 @@ This project is supported by Bundler and includes a `Gemfile`.
 Run `bundle install` before getting started on the project.
 
 As this project has quite a few files, an `environment.rb` is included that
-loads all the code in your project along with Bundler. You do not ever need to
-edit this file. When you see `require_relative '../config/environment'`, as in
+loads all the code in your project along with Bundler. You do not need to edit
+this file. When you see `require_relative '../config/environment'`, as in
 `bin/tictactoe`, that is how your environment and code are loaded.
 
-#### `lib` - Tic-tac-toe models
+#### `lib` - Tic-Tac-Toe Models
 
-You will be implementing Tic-tac-toe through a domain model that uses multiple
+You will be implementing Tic-Tac-Toe through a domain model that uses multiple
 classes to encapsulate the different logical components and units in
-Tic-tac-toe.
+Tic-Tac-Toe.
 
 ##### `board.rb` - `Board`
 
-The `Board` class represents the data and logic of a Tic-tac-toe game board. It
+The `Board` class represents the data and logic of a Tic-Tac-Toe game board. It
 has a property, `cells`, that stores the data of the state of the board in an
 array. The `#reset!` method can reset the state of the cells to what a board
 should look like at the start of a game, an array with 9 `" "` elements.
 
 When a board is initialized, it should start with cells for a new game of
-Tic-tac-toe. You can and should use `#reset!`.
+Tic-Tac-Toe. You can and should use `#reset!`.
 
 A board can print its current state with the `#display` method.
 
@@ -131,14 +103,14 @@ and not taken.
 
 ##### `player.rb` - `Player`
 
-The `Player` class is not actually a valid player of Tic-tac-toe but rather a
+The `Player` class is not actually a valid player of Tic-Tac-Toe but rather a
 root class that will act as an inheritance point for actual player classes such
 as `Human < Player` and `Computer < Player`. The `Player` root class will define
 only the most basic properties of a player, that they have a `token` property
 that can be set upon initialization.
 
 Every player subclass will implement a `#move` method that represents how that
-type of player makes a move in Tic-tac-toe.
+type of player makes a move in Tic-Tac-Toe.
 
 ##### 'players/human.rb' - `Players::Human`
 
@@ -169,13 +141,22 @@ with `Players::Human`.
 ##### `game.rb` - `Game`
 
 The `Game` class is the main model of the application and represents a singular
-instance of a Tic-tac-toe session.
+instance of a Tic-Tac-Toe session, so we would expect `Game.new` to start a game.
 
-* A game has one `Board` through its `board` property.
-* A game has two `Player`s stored in a `player_1` and `player_2` property.
+- A game has two `Player`s stored in a `player_1` and `player_2` property.
+- A game has one `Board` through its `board` property.
 
-`Board` and `Player` do not directly relate to the `Game` but do collaborate
-with each other through arguments.
+Every `Game` instance of Tic-Tac-Toe will involve two `Player` instances and a
+`Board` instance, even if the players are sometimes AI controlled. Because
+`Game` is the main entry point to this application and we know we'll always need
+two players and a board, so whenever a `Game` instance is initialized, make sure
+to also create instances of these as well and assign them to the appropriate
+attribute accessors.
+
+, it should be first passed a `Player`
+instance representing player 1, then a second `Player` instance for 
+
+A game should be initialized with 
 
 Beyond providing relationships with players and a board, the `Game` instance
 must also provide the basic game runtime and logic. These methods relate to the
@@ -186,7 +167,7 @@ suite describes the method requirements.
 ##### 'players/computer.rb' - `Players::Computer`
 
 Define a class `Players::Computer` that represents a computer player of
-Tic-tac-toe. Implement a `#move` method that accepts a board and returns the
+Tic-Tac-Toe. Implement a `#move` method that accepts a board and returns the
 move the computer wants to make in the form of a 1-9 string. How the computer
 decides to make that move is up to you but it must be capable of returning a
 valid move at some point.
@@ -205,7 +186,7 @@ Think about the levels of intelligence you can build into this method. Start
 with the simplest level of intelligence, and get more and more complicated. Each
 step of the way you should have a working computer player though.
 
-Remember, Tic-tac-toe when played perfectly is unwinnable. You should strive to
+Remember, Tic-Tac-Toe when played perfectly is unwinnable. You should strive to
 build computer logic that when the computer plays, the game is unwinnable. You
 can hardcode your logic, things like "On turn 1 always try to go in the middle
 if you can" and if not "try to go in a corner" or any logic tree you can think
